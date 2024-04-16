@@ -10,6 +10,10 @@ import morgan from "morgan";
 
 
 import routerEvenements from "./routers/evenementRouter.js";
+import employeRouter from "./routers/employeRouter.js";
+import userRouter from "./routers/userRouter.js";
+import AuthUtils from "./auth/auth.js";
+import routerTypeEmplois from "./routers/typeEmploiRouter.js";
 
 
 
@@ -29,14 +33,16 @@ app.use(urlencoded({ extended: false }));
 
 
 
-
+app.use(AuthUtils.authenticateApiKey)
 
 
 
 
 // Ajouter des routes
 app.use("/api/evenement",  routerEvenements);
-
+app.use("/api/employe",employeRouter)
+app.use('/api/utilisateur', userRouter)
+app.use('/api/typeEmploi', routerTypeEmplois)
 
 // Démarrage du serveur
 app.listen(process.env.PORT);
